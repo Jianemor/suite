@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuitEveryCase - Page d'Achat</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #blur-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(8px);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+
+        body.menu-open #blur-overlay {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 3rem 1rem;
+            position: relative;
+            z-index: 5;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            color: #5a4e4a;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #8a7e79;
+            margin-top: 0.5rem;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background-color: #d9a679;
+            z-index: -1;
+            clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            background-color: #fff8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #d9a679;
+            color: #fff;
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            z-index: 1000;
+        }
+
+        .menu-toggle:hover {
+            background-color: #b07b50;
+        }
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background-color: rgba(90, 78, 74, 0.95);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 100px;
+            z-index: 2000;
+        }
+
+        .side-menu.open {
+            transform: translateX(0);
+        }
+
+        .side-menu button {
+            margin: 10px 0;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            background-color: #d9a679;
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .side-menu button:hover {
+            transform: scale(1.1);
+            background-color: #b07b50;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f3ed; /* Fond beige clair */
+            color: #5a4e4a; /* Texte brun doux */
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            background-color: #d9a679; /* Beige foncé */
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+        }
+
+        .container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product {
+            background-color: #fff8f0; /* Beige très clair */
+            border: 1px solid #d9a679; /* Contour beige foncé */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .product img {
+            max-width: 150px;
+            border-radius: 10px;
+            margin-right: 1.5rem;
+        }
+
+        .product-details {
+            flex: 1;
+        }
+
+        .product-details h2 {
+            font-size: 1.5rem;
+            color: #5a4e4a;
+        }
+
+        .product-details p {
+            margin: 0.5rem 0;
+            color: #8a7e79;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #b07b50; /* Brun intense */
+            margin-top: 0.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .cta-buttons button {
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            background-color: #d9a679; /* Beige foncé */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-buttons button:hover {
+            background-color: #b07b50; /* Brun intense */
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+            background-color: #d9a679; /* Beige foncé */
+            color: white;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        footer a:hover {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SuitEveryCase</h1>
+        <p>Découvrez l'élégance et la technologie réunies.</p>
+    </header>
+    <div class="side-menu" id="side-menu">
+        <button onclick="location.href='swag69.html';">EN SAVOIR PLUS</button>
+        <button onclick="location.href='achat69.html';">ACHETER</button>
+    </div>
+
+    <div class="container">
+        <!-- Produit 1 -->
+        <div class="product">
+            <img src="valise_or.png" alt="Valise Luxe">
+            <div class="product-details">
+                <h2>Valise Luxe</h2>
+                <p>Le choix ultime pour allier sophistication et commodité.</p>
+                <p class="price">500€</p>
+                <div class="cta-buttons">
+                    <button onclick="location.href='swag69.html'">En savoir plus</button>
+                    <button>Ajouter au panier</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Produit 2 -->
+        <div class="product">
+            <img src="valise_argent.png" alt="Valise Élégance">
+            <div class="product-details">
+                <h2>Valise Élégance</h2>
+                <p>Un mélange parfait de robustesse et de design épuré.</p>
+                <p class="price">1500€</p>
+                <div class="cta-buttons">
+                    <button onclick="location.href='swag69.html'">En savoir plus</button>
+                    <button>Ajouter au panier</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Produit 3 -->
+        <div class="product">
+            <img src="valise_rose_dore.png" alt="Valise Pratique">
+            <div class="product-details">
+                <h2>Valise Pratique</h2>
+                <p>Pour voyager avec aisance et style.</p>
+                <p class="price">500 €</p>
+                <div class="cta-buttons">
+                    <button onclick="location.href='swag69.html'">En savoir plus</button>
+                    <button>Ajouter au panier</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 SuitEveryCase. Tous droits réservés. <a href="#">Contactez-nous</a></p>
+    </footer>
+</body>
+</html>

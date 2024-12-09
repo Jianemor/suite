@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuitEveryCase - Détails</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdf7f2;
+            color: #5a4e4a;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: relative;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #d9a679, #b07b50);
+            color: white;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: slideDown 1.5s ease-out;
+        }
+
+        header h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+        }
+
+        header p {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            z-index: 2;
+            position: relative;
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            width: 120%;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0));
+            transform: translateX(-50%);
+            animation: floatingGlow 4s infinite ease-in-out;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 1rem;
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 5rem;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1.5s ease-out forwards;
+        }
+
+        .section:nth-child(odd) {
+            animation-delay: 0.3s;
+        }
+
+        .section:nth-child(even) {
+            animation-delay: 0.6s;
+        }
+
+        .section img {
+            max-width: 80%;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.6s ease-out;
+        }
+
+        .section:hover img {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .section h2 {
+            font-size: 3.2rem;
+            font-weight: bold;
+            color: #5a4e4a;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+            text-transform: uppercase;
+            animation: slideInFromLeft 1s ease-out;
+        }
+
+        .section h2::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: -80px;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(217, 166, 121, 0.2);
+            border-radius: 50%;
+            z-index: -1;
+            transform: translateY(-50%);
+            animation: pulse 2s infinite;
+        }
+
+        .section p {
+            font-size: 1.3rem;
+            color: #8a7e79;
+            text-align: center;
+            max-width: 800px;
+            line-height: 1.8;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .section p::before {
+            content: '“';
+            font-size: 2rem;
+            color: #d9a679;
+            margin-right: 5px;
+            vertical-align: top;
+        }
+
+        .section p::after {
+            content: '”';
+            font-size: 2rem;
+            color: #d9a679;
+            margin-left: 5px;
+            vertical-align: bottom;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #d9a679, #b07b50);
+            color: white;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+            animation: slideUp 1.5s ease-out;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        footer a:hover {
+            text-decoration: none;
+            color: #fdf7f2;
+        }
+        img{
+            margin-top: 50px;
+            height: 100px;
+            width: 350px;
+        }
+
+        /* Keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        @keyframes floatingGlow {
+            0%, 100% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SuitEveryCase</h1>
+        <p>Chaque détail pensé pour les voyageurs exigeants</p>
+    </header>
+
+    <div class="container">
+        <!-- Section 1 -->
+        <div class="section">
+            
+            <h2>Suivi en Temps Réel</h2>
+            <p>
+                Localisez votre valise où que vous soyez grâce à notre application mobile. 
+                Profitez de la tranquillité d'esprit avec un suivi précis, que vous soyez à l'aéroport, dans un train ou à l'hôtel.
+            </p>
+            <img src="loc_valise.jpeg">
+        </div>
+
+        <!-- Section 2 -->
+        <div class="section">
+           
+            <h2>Gestion Intelligente du Contenu</h2>
+            
+            <p>
+                Consultez facilement la liste de vos affaires et leur poids directement depuis votre smartphone.
+                Organisez votre voyage sans stress et évitez les frais imprévus.
+            </p>
+            <img src="contenue_valise.jpeg">
+        </div>
+
+        <!-- Section 3 -->
+        <div class="section">
+            
+            <h2>Sécurité Renforcée</h2>
+            <p>
+                Protégez vos affaires avec un verrouillage digital, une détection d’ouverture non autorisée et des alertes instantanées. 
+                Une sécurité inégalée pour vos voyages.
+            </p>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="section">
+            
+            <h2>Rechargement Intégré</h2>
+            <p>
+                Gardez vos appareils électroniques chargés grâce à notre système de batterie intégré. 
+                Une innovation conçue pour les voyageurs connectés.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 SuitEveryCase. Pensé pour l'élégance. <a href="#">En savoir plus</a>.</p>
+    </footer>
+</body>
+</html>
